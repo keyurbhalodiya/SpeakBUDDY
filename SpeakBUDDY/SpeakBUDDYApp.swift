@@ -11,7 +11,7 @@ import SwiftUI
 struct SpeakBUDDYApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+          WelcomeView()
         }
     }
 }
