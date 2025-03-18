@@ -43,7 +43,7 @@ struct WelcomeView: View {
   /// Animates bars one by one with a delay
   private func animateBarsWithDelay() {
     for (index, _) in progressAnalytics.enumerated() {
-      DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.2) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.25) {
         withAnimation(.easeInOut(duration: 0.8)) {
           progressAnalytics[index].animate = true
         }
@@ -77,7 +77,6 @@ private func greetingText(isLargeScreen: Bool) -> some View {
     .font(.system(size: isLargeScreen ? 48 : 36, weight: .bold))
     .multilineTextAlignment(.center)
     .foregroundColor(Color(hex: "#323537"))
-    .padding(.bottom, 20)
 }
 
 /// Motivational Text Below Chart

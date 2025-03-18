@@ -17,13 +17,12 @@ func chartContainer(_ progressAnalytics: [ProgressData]) -> some View {
                 Image("protty")
                 Spacer()
             }
-            .padding([.leading, .top], 20)
+            .padding([.leading], 20)
             Spacer()
         }
         VStack {
-            Spacer()
           animatedChart(progressAnalytics)
-                .padding()
+            .padding()
         }
         .padding()
     }
