@@ -9,27 +9,23 @@ import SwiftUI
 
 struct WelcomeView: View {
   
+  @Environment(\.horizontalSizeClass) var horizontalSizeClass
+  
   @State private var progressAnalytics: [ProgressData] = progress_analytics
   
   var body: some View {
     NavigationStack {
       GeometryReader { geometry in
-        let isLargeScreen = geometry.size.width > 600
-        
+        let isLargeScreen = horizontalSizeClass == .regular
         VStack {
+          Spacer()
           topCloseButton()
-          
           greetingText(isLargeScreen: isLargeScreen)
-          
-          chartContainer(progressAnalytics)
-          
+          chartContainer(uiSizing: horizontalSizeClass ?? .compact, progressAnalytics)
           motivationalText(isLargeScreen: isLargeScreen)
-          
           subscriptionButton()
-          
           Spacer()
         }
-        .frame(width: geometry.size.width, height: geometry.size.height)
         .background(backgroundGradient())
       }
     }
@@ -43,8 +39,8 @@ struct WelcomeView: View {
   /// Animates bars one by one with a delay
   private func animateBarsWithDelay() {
     for (index, _) in progressAnalytics.enumerated() {
-      DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.25) {
-        withAnimation(.easeInOut(duration: 0.8)) {
+      DispatchQueue.main.asyncAfter(deadline: .now() + Double(index) * 0.1) {
+        withAnimation(.easeInOut(duration: 0.5)) {
           progressAnalytics[index].animate = true
         }
       }

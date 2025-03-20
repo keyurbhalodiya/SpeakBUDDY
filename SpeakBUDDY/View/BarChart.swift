@@ -10,22 +10,26 @@ import Charts
 
 /// Chart Container with Background Image
 @ViewBuilder
-func chartContainer(_ progressAnalytics: [ProgressData]) -> some View {
+func chartContainer(uiSizing: UserInterfaceSizeClass, _ progressAnalytics: [ProgressData]) -> some View {
     ZStack {
-        VStack {
-            HStack {
-                Image("protty")
-                Spacer()
-            }
-            .padding([.leading], 20)
-            Spacer()
-        }
-        VStack {
-          animatedChart(progressAnalytics)
-            .padding()
-        }
-        .padding()
-    }
+      VStack {
+          HStack {
+              Image("protty")
+                  .resizable()
+                  .scaledToFit()
+                  .frame(width: uiSizing == .regular ? 282 : 188, height: uiSizing == .regular ? 240 : 160)
+              Spacer()
+          }
+          .padding([.leading], 20)
+          Spacer()
+      }
+      VStack {
+        Spacer()
+        animatedChart(progressAnalytics)
+          .padding()
+      }
+      .padding()
+  }
 }
 
 /// Animated Chart View
